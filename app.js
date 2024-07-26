@@ -48,15 +48,16 @@ function handleClick() {
     for (let indexRow = 0; indexRow < lockersList.length; indexRow++) {
         for (let indexColumn = 0; indexColumn < lockersList[indexRow].length; indexColumn++) {
             const element = lockersList[indexRow][indexColumn];
-            if(isEmpty(lockersList, indexRow, indexColumn)) {
-                element.addEventListener('click', ()=> {
+            element.addEventListener('click', ()=> {
+                if(isEmpty(lockersList, indexRow, indexColumn)) {
                     element.textContent = 'X';
                     element.style.color = '#F54104'
                     statusLockers[indexRow][indexColumn] = 'x';
                     machineTurn();
                     verifyWinner();
-                }); 
-            }
+                }
+                
+            });
             
         }
     }
@@ -85,7 +86,7 @@ function verifyWinner() {
         (statusLockers[0][2] === 'x' && statusLockers[1][2] === 'x' && statusLockers[2][2] === 'x') ||
         (statusLockers[0][0] === 'x' && statusLockers[1][1] === 'x' && statusLockers[2][2] === 'x') ||
         (statusLockers[0][2] === 'x' && statusLockers[1][1] === 'x' && statusLockers[2][0] === 'x')) {
-        showWinner("¡Ganaste! 😄");
+        setTimeout(()=>showWinner("¡Ganaste! 😄"), 500);
         return;
     }
      //Verificar todas las posibles combinaciones ganadoras para la Máquina
@@ -97,11 +98,11 @@ function verifyWinner() {
         (statusLockers[0][2] === 'o' && statusLockers[1][2] === 'o' && statusLockers[2][2] === 'o') ||
         (statusLockers[0][0] === 'o' && statusLockers[1][1] === 'o' && statusLockers[2][2] === 'o') ||
         (statusLockers[0][2] === 'o' && statusLockers[1][1] === 'o' && statusLockers[2][0] === 'o')) {
-        showWinner("¡Perdiste! 😞");
+        setTimeout(()=>showWinner("¡Perdiste! 😞"), 500);
         return;
     }
     if (verifyFullTable()) {
-        showWinner("¡Es un empate! 🤜🏼🤛🏼");
+        setTimeout(()=>showWinner("¡Es un empate! 🤜🏼🤛🏼"), 500);
     }
 }
 
@@ -112,7 +113,7 @@ function getRandomNumber(min, max) {
 
 // función que retorna true si la casilla se encuentra vacía
 function isEmpty(matriz, rowIndex, columnIndex) {
-    return matriz[rowIndex][columnIndex].textContent === ''? true : false;
+    return matriz[rowIndex][columnIndex].textContent == '';
 }
 
 // función que verifica que la tabla esté completamente llena
