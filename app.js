@@ -153,6 +153,6 @@ function reloadGame() {
     });
 
     divsCeldas.forEach((cell) => {
-        cell.textContent = "";
+        cell.textContent = '';
     });  
 }
